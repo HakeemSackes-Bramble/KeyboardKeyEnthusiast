@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "available keys": [
+    {
+      "name": "Letter B",
+      "textColor": "darkgray",
+      "url": "/classroom/photos/letter_B.jpg"
+    },
+    {
+      "name": "Letter B",
+      "textColor": "darkgray",
+      "url": "/classroom/photos/letter_B.jpg"
+    },
+    {
+      "name": "Letter F",
+      "textColor": "magenta",
+      "url": "/classroom/photos/letter_F.jpg"
+    },
+    {
+      "name": "Letter G",
+      "textColor": "fuchsia",
+      "url": "/classroom/photos/letter_G.jpg"
+    },
+    {
+      "name": "Letter G",
+      "textColor": "fuchsia",
+      "url": "/classroom/photos/letter_G.jpg"
+    }
+  ]
+}
