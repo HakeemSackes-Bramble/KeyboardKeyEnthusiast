@@ -1,11 +1,13 @@
 package nyc.c4q.hakeemsackes_bramble.keyboardkeyenthusiast;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import java.util.List;
 
@@ -22,13 +24,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by hakeemsackes-bramble on 1/11/17.
  */
-
 public class KeyFragment extends android.support.v4.app.Fragment {
 
-    //keyslist;
     View root;
     RecyclerView recyclerView;
-
+    FrameLayout fragLayout;
+    List<Keys> keyslist;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,12 +38,16 @@ public class KeyFragment extends android.support.v4.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        getBoardData(inflater, parent);
+        getBoardData();
+        root = inflater.inflate(R.layout.main_fragment, parent, false);
+        fragLayout = (FrameLayout) root.findViewById(R.id.main_fragment);
+        recyclerView = (RecyclerView) root.findViewById(R.id.key_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(new KeysAdapter(keyslist));
         return root;
     }
 
-    private void getBoardData(final LayoutInflater inflater, final ViewGroup parent) {
-
+    private void getBoardData() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://jsjrobotics.nyc/cgi-bin/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -53,15 +58,9 @@ public class KeyFragment extends android.support.v4.app.Fragment {
             @Override
             public void onResponse(Call<KeyBoardData> call, Response<KeyBoardData> response) {
                 KeyBoardData data = response.body();
-
-                List<Keys> keyslist = data.getAvailable_keys();
-
-                root = inflater.inflate(R.layout.main_fragment, parent, false);
-                recyclerView = (RecyclerView) root.findViewById(R.id.key_recyclerview);
-                recyclerView.setAdapter(new KeysAdapter(keyslist));
+                keyslist = data.getAvailable_keys();
                 System.out.println("it worked");
-                Log.d("", "onResponse: post data " + data.isSucess());
-
+                Log.d("", "onResponse: post data " + data.isSuccess());
             }
 
             @Override

@@ -15,6 +15,7 @@ import nyc.c4q.hakeemsackes_bramble.keyboardkeyenthusiast.key_retrofit_call.Keys
  */
 
 public class KeysAdapter extends  RecyclerView.Adapter<KeysViewHolder> {
+
     List<Keys> keys;
 
     public KeysAdapter(List<Keys> keys) {
@@ -30,6 +31,7 @@ public class KeysAdapter extends  RecyclerView.Adapter<KeysViewHolder> {
 
     @Override
     public void onBindViewHolder(KeysViewHolder holder, int position) {
+        KeysViewHolder kvh = (KeysViewHolder) holder;
         Keys key = keys.get(position);
         holder.keyName.setText(key.getKeyName());
         holder.keyName.setTextColor(Color.parseColor(key.getTextColor()));
